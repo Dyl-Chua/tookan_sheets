@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<title> DOCUMENT </title>
+
+<body>
+
+
+<div id="Result Table">
+
+    <table id="Result_Table" class="table table-light table-striped table-bordered table-hover">
+        <tbody>
+          <tr>
+        <th scope="col">Job ID</th>
+        <th scope="col">Order ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Job Description</th>
+ </tr>
+   
+    <%trackingList.forEach(tracking => {%>
+        <tr id="myUL">
+            <td><%= tracking.job_id %></td>
+            <td><%= tracking.order_id></td>
+            <th scope="row"><%= tracking.customer_name %></th>
+            <td><%= tracking.job_address %></td>
+            <td><%= tracking.customer_phone %></td>   
+            <td><%= tracking.job_description %></td>
+          
+        </tr>
+    <%})%>
+    </tbody>
+  </table>
+
+</div>
+    <script>
+
+var request = new XMLHttpRequest();
+
+request.open('POST', 'https://api.tookanapp.com/v2/get_job_details');
+
+request.setRequestHeader('Content-Type', 'application/json');
+
+request.onreadystatechange = function () {
+  if (this.readyState === 4) {
+    console.log('Status:', this.status);
+    console.log('Headers:', this.getAllResponseHeaders());
+    console.log('Body:', this.responseText);
+  }
+};
+
+var body = {
+  'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
+  'job_ids': [
+  329518242
+  ],
+  'include_task_history': 1
+};
+
+request.send(JSON.stringify(body));
+
+    </script>
+</body>
+</html>>
